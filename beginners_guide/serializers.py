@@ -5,3 +5,8 @@ class OnboardingSerializer(serializers.ModelSerializer):
         class Meta:
             model = Onboarding
             fields = ['title', 'slug', 'body', 'thumbnail']
+
+class PublisherOnboardingSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Onboarding
+            fields = '__all__'

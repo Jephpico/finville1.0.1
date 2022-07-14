@@ -1,0 +1,53 @@
+footer {
+  padding: 1.8rem 3.6rem;
+  background-color: #2d459d;
+  color: #fff;
+  position: relative;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.disclaimer {
+  margin-bottom: 2.4rem;
+  color: #ffb3b3;
+}
+.disclaimer h3 {
+  font-size: 1.7rem;
+  line-height: 0;
+}
+.disclaimer p {
+  font-size: 1.3rem;
+}
+.copyright p {
+  font-size: 1.4rem;
+}
+.socials h4 {
+  margin-bottom: 0.8rem;
+}
+.socials {
+  position: absolute;
+  /* top: 1.6rem;
+  right: 2rem; */
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  display: flex;
+  font-size: 1.4rem;
+  flex-direction: column;
+  text-align: center;
+}
+.social-icons {
+  font-size: 1.6rem;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+@media (max-width: 970px) {
+  .disclaimer {
+    width: 80%;
+    margin: 3.2rem auto;
+  }
+}

@@ -11,6 +11,10 @@ class OnboardingViewSet(viewsets.ViewSet):
         def list(self, request):
                 serializer_class = OnboardingSerializer(self.queryset, many=True)
                 return Response(serializer_class.data)
+        def retrieve(self, request, pk=None):
+                onboarding_post = get_object_or_404(self.queryset,pk=pk)
+                serializer_class = OnboardingSerializer(onboarding_post)
+                return Response(serializer_class.data)
 
 class PublisherBoardViewSet(viewsets.ModelViewSet):
         permission_classes = [IsAdminUser]

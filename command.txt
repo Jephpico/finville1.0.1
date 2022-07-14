@@ -1,0 +1,2 @@
+BACKEND COMMANDS
+python manage.py runserver (start server)

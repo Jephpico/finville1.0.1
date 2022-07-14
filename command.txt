@@ -1,2 +1,8 @@
 BACKEND COMMANDS
 python manage.py runserver (start server)
+
+
+
+FRONTEND COMMANDS
+**npm install**(to install the modules)
+**npm start**(to start server)

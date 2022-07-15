@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'blog',
     'services',
     'api',
+    'accounts',
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -60,8 +62,13 @@ ROOT_URLCONF = 'finville.urls'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
+
+#AUTH_USER_MODEL = 'accounts.ProductUser'
 
 TEMPLATES = [
     {

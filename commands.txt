@@ -1,7 +1,6 @@
 BACKEND COMMANDS
 python -m venv env(setup virtual environment)
-pip install to-requirements.txt
-python manage.py runserver (start server) 
-
+pip install -r requirements.txt
+python manage.py runserver (start server)
 
 

@@ -17,7 +17,6 @@ class OnboardingViewSet(viewsets.ViewSet):
                 return Response(serializer_class.data)
 
 class PublisherBoardViewSet(viewsets.ModelViewSet):
-        permission_classes = [IsAdminUser]
         queryset = Onboarding.objects.all()
         serializer_class = PublisherOnboardingSerializer
         

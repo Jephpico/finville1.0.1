@@ -5,7 +5,7 @@ const HeroForm = () => {
   return (
     <div className={classes["hero-form-container"]}>
       <h3>Get the most from financial markets, fintech products & services</h3>
-      <form>
+      <form className={classes["form-group"]}>
         <input
           className={classes.input}
           type="email"

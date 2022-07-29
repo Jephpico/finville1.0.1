@@ -16,7 +16,7 @@ const ServicesHome = () => {
           </div>
           <div className={classes["text-box"]}>
             <h3>Trader</h3>
-            <span>
+            <span className={classes.span}>
               We offer Trading-as-a-service across various financial markets
             </span>
             <p>
@@ -30,7 +30,7 @@ const ServicesHome = () => {
         <Card className={classes.right}>
           <div className={classes["text-box"]}>
             <h3>Onboarder</h3>
-            <span>
+            <span className={classes.span}>
               We offer Onboarding-as-a-service across various financial markets
             </span>
             <p>

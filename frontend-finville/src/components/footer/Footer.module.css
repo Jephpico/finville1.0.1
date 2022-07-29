@@ -3,6 +3,7 @@ footer {
   background-color: #2d459d;
   color: #fff;
   position: relative;
+  margin-top: 11rem;
 }
 .left {
   display: flex;

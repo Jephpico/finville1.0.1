@@ -4,6 +4,7 @@ import icon1 from "../../../assets/Rectangle 22.png";
 import icon2 from "../../../assets/Rectangle 50.png";
 import icon3 from "../../../assets/Rectangle 52.png";
 import icon4 from "../../../assets/Rectangle 137.png";
+import { Link } from "react-router-dom";
 
 const BeginnersLanding = () => {
   return (
@@ -34,7 +35,12 @@ const BeginnersLanding = () => {
               Beginner's guide is a simplistic guide, carefully curated to ease
               the learning hassle of Newbies across various financial terrain.
             </p>
-            <button className={classes.btn}>Get Started &rarr;</button>
+            <Link
+              to="/Beginners-Guide"
+              style={{ textDecoration: "none", cursor: "pointer" }}
+            >
+              <button className={classes.btn}>Get Started &rarr;</button>
+            </Link>
           </div>
         </div>
       </div>

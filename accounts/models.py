@@ -11,6 +11,7 @@ class ProductUserManager(BaseUserManager):
         if not email:
             raise ValueError(_('kindly enter a valid email address'))
         email = self.normalize_email(email)
+        email = email.lower()
         user = self.model(
             email=email,
             user_name=user_name,
@@ -32,8 +33,7 @@ class ProductUserManager(BaseUserManager):
         return self.create_user(email, user_name, password, **otherfields)
 
 
-    def create_publisher(self, email, user_name,first_name, last_name, password, **otherfields):
-        otherfields.setdefault('is_staff', True)
+    def create_publisher(self, email, user_name,first_name, last_name, password=None, **otherfields):
         otherfields.setdefault('is_publisher', True)
 
         
@@ -48,7 +48,7 @@ class ProductUserManager(BaseUserManager):
 
 class ProductUser(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
-    user_name = models.CharField(max_length=20 ,unique=True)
+    user_name = models.CharField(max_length=20, unique=True)
     start_date = models.DateTimeField(auto_now_add=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)

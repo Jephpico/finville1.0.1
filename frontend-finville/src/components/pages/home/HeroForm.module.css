@@ -9,7 +9,7 @@
   text-align: center;
   margin-bottom: 1.2rem;
 }
-form {
+.form-group {
   display: grid;
   grid-template-columns: 70% 30%;
 }
@@ -49,4 +49,5 @@ form {
   .hero-form-container {
     margin: 3rem 2rem 0;
   }
-} */
+}
+*/

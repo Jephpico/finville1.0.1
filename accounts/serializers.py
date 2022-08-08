@@ -1,4 +1,33 @@
-from dataclasses import fields
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('name', 'email', 'is_publisher', )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+""" from dataclasses import fields
 from rest_framework import serializers
 from accounts.models import ProductUser
 
@@ -23,4 +52,4 @@ class SignUpSerializer(serializers.ModelSerializer):
         #         else:
         #             setattr(instance, attr, value)
         #     instance.save()
-        #     return instance
+        #     return instance """

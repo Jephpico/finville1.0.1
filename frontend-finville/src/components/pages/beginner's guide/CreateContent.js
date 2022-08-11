@@ -15,9 +15,9 @@ const CreateContent = () => {
   const initialPostData = Object.freeze({
     title: "",
     slug: "",
-    thumbnail: "",
+    // thumbnail: "",
     body: "",
-    arthor: "",
+    // arthor: "",
   });
   const [postData, setPostData] = useState(initialPostData);
 
@@ -34,8 +34,8 @@ const CreateContent = () => {
       title: postData.title,
       slug: postData.slug,
       body: postData.body,
-      thumbnail: postData.thumbnail,
-      arthor: postData.arthor,
+      // thumbnail: postData.thumbnail,
+      // arthor: postData.arthor,
     });
     // .then((res) => {
     //   if (res.data.success) {
@@ -54,7 +54,7 @@ const CreateContent = () => {
             className={style["form-control"]}
             name="title"
             id="title"
-            value={postData.title}
+            value={title}
             onChange={handlePostChange}
           />
         </div>
@@ -65,11 +65,11 @@ const CreateContent = () => {
             className={style["form-control"]}
             name="slug"
             id="slug"
-            value={postData.slug}
+            value={slug}
             onChange={handlePostChange}
           />
         </div>
-        <div className={style["form-group"]}>
+        {/* <div className={style["form-group"]}>
           <label htmlFor="slug">Thumbnail</label>
           <input
             type="file"
@@ -79,7 +79,7 @@ const CreateContent = () => {
             value={postData.thumbnail}
             onChange={handlePostChange}
           />
-        </div>
+        </div> */}
         <div className={style["form-group"]}>
           <label htmlFor="content">Content</label>
           {/* <CKEditor
@@ -97,11 +97,11 @@ const CreateContent = () => {
             className={style["form-control"]}
             name="body"
             id="body"
-            value={postData.body}
+            value={body}
             onChange={handlePostChange}
           />
         </div>
-        <div className={style["form-group"]}>
+        {/* <div className={style["form-group"]}>
           <label htmlFor="slug">arthor</label>
           <input
             type="email"
@@ -111,7 +111,7 @@ const CreateContent = () => {
             value={postData.arthor}
             onChange={handlePostChange}
           />
-        </div>
+        </div> */}
         <button type="submit">Submit</button>
       </form>
     </div>

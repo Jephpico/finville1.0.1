@@ -73,6 +73,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 class ProductUserManager(BaseUserManager):
     def create_user(self, email, last_name, first_name, password=None):
+
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -99,11 +100,13 @@ class ProductUserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email, password=None):
-        user = self.create_user(email, password)
+    def create_superuser(self, email,  password=None):
+        user = self.create_user( email=email,first_name=None,last_name=None, password=password)
 
         user.is_superuser = True
         user.is_staff = True
+        user.is_active= True
+
 
         user.save()
 
@@ -114,8 +117,8 @@ class ProductUserManager(BaseUserManager):
 class ProductUser(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     start_date = models.DateTimeField(auto_now_add=True)
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=20, null=True, blank=True)
+    last_name = models.CharField(max_length=20, null=True, blank=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_publisher = models.BooleanField(default=False)

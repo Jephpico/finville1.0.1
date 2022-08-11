@@ -26,11 +26,20 @@ const Navbar = () => {
           <Link to="/Blog" className={classes["nav-link"]}>
             <li>Blog</li>
           </Link>
+          {/* <Link to="/publisher/logout" className={classes["nav-link"]}>
+            <li>Logout</li>
+          </Link> */}
           <Link
             to="/Login"
             className={`${classes["nav-link"]} ${classes["sign-in"]}`}
           >
             <li>Login</li>
+          </Link>
+          <Link
+            to="/SignUp"
+            className={`${classes["nav-link"]} ${classes["sign-up"]}`}
+          >
+            <li>Sign In</li>
           </Link>
           <Link
             to="/SignUp"

@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../axios";
 import {
   Avatar,
   CssBaseline,
@@ -12,12 +13,46 @@ import {
   ThemeProvider,
   Box,
 } from "@mui/material";
+import { LockOpen } from "@mui/icons-material";
 
 const theme = createTheme();
-const Register = () => {
+const Login = () => {
+  let navigate = useNavigate();
+  const initialFormData = Object.freeze({
+    email: "",
+    password: "",
+  });
+  const [formData, setFormData] = useState(initialFormData);
+
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axiosInstance
+      .post("/token/", {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((res) => {
+        localStorage.setItem("access_token", res.data.access);
+        localStorage.setItem("refresh_token", res.data.refresh);
+        axiosInstance.defaults.headers["Authorization"] =
+          `JWT ` + localStorage.getItem("access_token");
+        return navigate("/create");
+      });
+  };
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="xs">
+      <Container
+        maxWidth="xs"
+        sx={{ boxShadow: "0 0 5px rgba(0,0,0,0.15)", borderRadius: "4px" }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -25,41 +60,27 @@ const Register = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            pt: 2,
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "#2d459d" }} />
+          <Avatar sx={{ m: 1, bgcolor: "#2d459d" }}>
+            <LockOpen />
+          </Avatar>
+
           <Typography variant="h4" component="h1">
-            Sign Up
+            Sign In
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 3 }}>
+          <Box component="form" noValidate sx={{ mt: 5 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   id="email"
-                  label="Email address"
-                  type="email"
+                  label="Email Address"
                   required
                   fullWidth
+                  onChange={handleChange}
                   name="email"
                   autoComplete="email"
-                  autoFocus
-                  InputLabelProps={{
-                    style: {
-                      fontSize: "16px",
-                    },
-                  }}
-                  InputProps={{ style: { fontSize: "16px" } }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="username"
-                  label="Username"
-                  type="text"
-                  required
-                  fullWidth
-                  name="username"
-                  autoComplete="username"
                   InputLabelProps={{
                     style: {
                       fontSize: "1.6rem",
@@ -75,10 +96,11 @@ const Register = () => {
                   type="password"
                   required
                   fullWidth
-                  name="new-password"
+                  onChange={handleChange}
+                  name="password"
                   InputLabelProps={{
                     style: {
-                      fontSize: "16px",
+                      fontSize: "1.6rem",
                     },
                   }}
                   InputProps={{ style: { fontSize: "1.6rem" } }}
@@ -90,20 +112,21 @@ const Register = () => {
               fullWidth
               variant="contained"
               sx={{
-                mt: 3,
+                mt: 5,
                 mb: 2,
                 bgcolor: "#2d459d",
                 fontSize: "1.4rem",
                 p: 1,
               }}
+              onClick={handleSubmit}
             >
-              Sign Up
+              Sign In
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="flex-end" paddingBottom={4}>
               <Grid item>
                 <Typography variant="p" sx={{ fontSize: "1.4rem" }}>
-                  Already have an account?
-                  <Link to="/publisher/login">Sign in</Link>
+                  Don't have an account yet?
+                  <Link to="/publisher/register">Sign up</Link>
                 </Typography>
               </Grid>
             </Grid>
@@ -113,4 +136,4 @@ const Register = () => {
     </ThemeProvider>
   );
 };
-export default Register;
+export default Login;

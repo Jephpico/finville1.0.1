@@ -36,10 +36,13 @@ User = get_user_model()
 from .serializers import UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import permissions, status
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 class SignUpView(APIView):
-    permission_classes = (permissions.AllowAny, )
+    permission_classes =[AllowAny]
 
     def post(self, request):
         try:
@@ -110,3 +113,18 @@ class RetrieveUserView(APIView):
                 {'error': 'Something went wrong when retrieving user details'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+
+
+
+class BlacklistTokenView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data['refresh_token']
+            refresh_token = RefreshToken(refresh_token)
+            refresh_token.blacklist()
+
+        except:
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)

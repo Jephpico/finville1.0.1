@@ -2,3 +2,4 @@ jvenv/
 node_modules/
 env/
 venv/
+.eslintcache

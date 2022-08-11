@@ -4,9 +4,9 @@ from beginners_guide.models import Onboarding
 class OnboardingSerializer(serializers.ModelSerializer):
         class Meta:
             model = Onboarding
-            fields = ['title', 'slug', 'body', 'thumbnail']
+            fields = ['title', 'slug', 'body']
 
 class PublisherOnboardingSerializer(serializers.ModelSerializer):
         class Meta:
             model = Onboarding
-            fields = '__all__'
+            fields = ['title', 'slug', 'body']

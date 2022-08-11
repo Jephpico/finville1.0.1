@@ -68,10 +68,14 @@ header {
   display: none;
 }
 @media (max-width: 58em) {
+  .navbar {
+    height: 60px;
+  }
   .logo {
     display: flex;
     position: absolute;
     left: 35px;
+    font-size: 2.4rem;
   }
   .nav-links {
     display: none;
@@ -96,7 +100,7 @@ header {
   .mobile-menu-icon {
     display: block;
     position: absolute;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: #2d459d;
     background-color: transparent;
     border: none;

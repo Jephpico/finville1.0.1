@@ -13,6 +13,7 @@ import {
   Box,
 } from "@mui/material";
 import axiosInstance from "../axios";
+import Header from "./Header";
 
 const theme = createTheme();
 const Register = () => {
@@ -43,7 +44,7 @@ const Register = () => {
         email: formData.email,
         password: formData.password,
         re_password: formData.re_password,
-        is_publisher: true,
+        is_publisher: "True",
       })
       .then((res) => {
         if (res.data.success) {
@@ -53,6 +54,7 @@ const Register = () => {
   };
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Container
         maxWidth="xs"
         sx={{ boxShadow: "0 0 5px rgba(0,0,0,0.15)", borderRadius: "4px" }}

@@ -1,7 +1,8 @@
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny
+
 from .serializers import OnboardingSerializer, PublisherOnboardingSerializer
 from beginners_guide.models import Onboarding
 
@@ -17,7 +18,7 @@ class OnboardingViewSet(viewsets.ViewSet):
                 return Response(serializer_class.data)
 
 class PublisherBoardViewSet(viewsets.ModelViewSet):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [AllowAny]
         queryset = Onboarding.objects.all()
         serializer_class = PublisherOnboardingSerializer
 

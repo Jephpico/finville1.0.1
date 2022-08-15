@@ -33,12 +33,15 @@ class SignUpView(APIView):
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
-from .serializers import UserSerializer
+from .serializers import UserSerializer, ProfileSerializer
 from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
+
 
 
 class SignUpView(APIView):
@@ -96,23 +99,30 @@ class SignUpView(APIView):
             return Response(
                 {'error': 'Something went wrong when registering an account'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
+   
             )
 
-class RetrieveUserView(APIView):
-    def get(self, request, format=None):
-        try:
-            user = request.user
-            user = UserSerializer(user)
 
-            return Response(
-                {'user': user.data},
-                status=status.HTTP_200_OK
-            )
-        except:
-            return Response(
-                {'error': 'Something went wrong when retrieving user details'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+class ProfileView(generics.RetrieveAPIView):
+    serializer_class = ProfileSerializer
+
+    def get_object(self):
+        return self.request.user
+# class RetrieveUserView(APIView):
+#     def get(self, request, format=None):
+#         try:
+#             user = request.user
+#             user = UserSerializer(user)
+
+#             return Response(
+#                 {'user': user.data},
+#                 status=status.HTTP_200_OK
+#             )
+#         except:
+#             return Response(
+#                 {'error': 'Something went wrong when retrieving user details'},
+#                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
+#             )
 
 
 

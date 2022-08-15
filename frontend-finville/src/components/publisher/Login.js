@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../store/auth-context";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axios";
 import {
@@ -14,10 +15,12 @@ import {
   Box,
 } from "@mui/material";
 import { LockOpen } from "@mui/icons-material";
+import Header from "./Header";
 
 const theme = createTheme();
 const Login = () => {
   let navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
   const initialFormData = Object.freeze({
     email: "",
     password: "",
@@ -40,15 +43,19 @@ const Login = () => {
         password: formData.password,
       })
       .then((res) => {
-        localStorage.setItem("access_token", res.data.access);
-        localStorage.setItem("refresh_token", res.data.refresh);
+        console.log(res);
+        console.log(res.data);
+        // localStorage.setItem("access_token", res.data.access);
+        // localStorage.setItem("refresh_token", res.data.refresh);
         axiosInstance.defaults.headers["Authorization"] =
           `JWT ` + localStorage.getItem("access_token");
-        return navigate("/create");
+        authCtx.login(res.data.access);
+        navigate("/publisher/dashboard");
       });
   };
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Container
         maxWidth="xs"
         sx={{ boxShadow: "0 0 5px rgba(0,0,0,0.15)", borderRadius: "4px" }}

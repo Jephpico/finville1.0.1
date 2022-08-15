@@ -33,6 +33,7 @@ const Onboarding = () => {
                   <img src={data.thumbnail} alt="" />
                   <h3>{data.title}</h3>
                   <p>{data.slug}</p>
+                  <div dangerouslySetInnerHTML={{ __html: data.body }}></div>
                 </li>
               );
             })}

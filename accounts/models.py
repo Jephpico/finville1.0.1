@@ -86,6 +86,7 @@ class ProductUserManager(BaseUserManager):
             first_name = first_name
 
         )
+        user.is_active = True
         user.set_password(password)
         user.save()
 
@@ -95,7 +96,7 @@ class ProductUserManager(BaseUserManager):
         user = self.create_user(email,first_name=first_name, last_name=last_name, password=password)
 
         user.is_publisher = True
-        user.is_active= True
+        user.is_active= False
         user.save()
 
         return user

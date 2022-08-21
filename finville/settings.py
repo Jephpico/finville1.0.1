@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,11 +49,13 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
      'rest_framework_simplejwt.token_blacklist',
+     'storages'
 ]
 
 MIDDLEWARE = [
     #'corsheaders.middleware.CorsMiddlewares',
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -186,6 +190,31 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=10),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#AWS CONFIG
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID  = 'AKIARGSINQTGOXXHJIEG'
+
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_QUERYSTRING_AUTH = False 
+
+AWS_STORAGE_BUCKET_NAME = 'thefinville'
+
+AWS_S3_FILE_OVERWRITE = False
+
+AWS_DEFAULT_ACL  = None
+
+
+
+
+django_heroku.settings(locals())

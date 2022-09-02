@@ -1,8 +1,5 @@
 import imp
 from rest_framework.permissions import DjangoModelPermissions
-from beginners_guide.models import Onboarding
-from rest_framework.response import Response
-from rest_framework import status 
 from django.core.exceptions import PermissionDenied
 
 class FullDjangoModelPermissions(DjangoModelPermissions):

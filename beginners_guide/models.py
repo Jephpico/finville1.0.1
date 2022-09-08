@@ -2,6 +2,7 @@ from urllib import request
 from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
+import datetime
 User = get_user_model()
 # Create your models here.
 class Onboarding(models.Model):
@@ -19,5 +20,8 @@ class Onboarding(models.Model):
 
         def __str__(self) -> str:
                 return self.title
+
+        def created_date(self):
+                return self.date.strftime('%d %B, %Y.')
     
    

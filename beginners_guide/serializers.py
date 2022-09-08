@@ -11,5 +11,5 @@ class PublisherOnboardingSerializer(serializers.ModelSerializer):
     user_first_name = serializers.CharField(source="author.first_name", read_only=True)
     class Meta:
             model = Onboarding
-            fields = ('title', 'slug', 'body' ,'thumbnail', 'image1','image2', 'image3','image4','image5', 'user_last_name','user_first_name')
+            fields = ('title', 'slug', 'body' ,'thumbnail', 'image1','image2', 'image3','image4','image5', 'user_last_name','user_first_name', 'created_date')
         

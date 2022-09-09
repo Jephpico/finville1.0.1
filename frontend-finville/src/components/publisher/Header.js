@@ -1,13 +1,6 @@
 import React, { useContext } from "react";
 import AuthContext from "../../store/auth-context";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  CssBaseline,
-  Button,
-  Link,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, CssBaseline, Link } from "@mui/material";
 
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -22,15 +15,29 @@ function Header() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="static" color="default" elevation={0}>
+      <AppBar
+        position="static"
+        elevation={0}
+        sx={{
+          bgcolor: "#2d459d",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Toolbar>
           {isLoggedIn && (
             <Typography variant="h6" color="inherit" noWrap>
               <Link
                 component={NavLink}
                 to="/publisher/dashboard"
-                underline="none"
-                color="textPrimary"
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.4rem",
+                  cursor: "pointer",
+                  marginRight: "1.6rem",
+                  textDecoration: "none",
+                }}
               >
                 All Posts
               </Link>
@@ -41,8 +48,13 @@ function Header() {
               <Link
                 component={NavLink}
                 to="/publisher/create-post"
-                underline="none"
-                color="textPrimary"
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.4rem",
+                  cursor: "pointer",
+                  marginRight: "1.6rem",
+                  textDecoration: "none",
+                }}
               >
                 Create Post
               </Link>
@@ -51,27 +63,53 @@ function Header() {
           {!isLoggedIn && (
             <nav>
               <Link
-                color="textPrimary"
-                href="#"
+                // sx={{ color: "#fff", fontSize: "2rem" }}
                 component={NavLink}
                 to="/publisher/register"
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.4rem",
+                  cursor: "pointer",
+                  marginRight: "1.6rem",
+                  textDecoration: "none",
+                }}
               >
                 Register
               </Link>
             </nav>
           )}
           {!isLoggedIn && (
-            <Button
-              href="#"
-              color="primary"
-              variant="outlined"
-              component={NavLink}
-              to="/publisher/login"
-            >
-              Login
-            </Button>
+            <nav>
+              <Link // sx={{ color: "#fff", fontSize: "1.6rem" }}
+                component={NavLink}
+                to="/publisher/login"
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.4rem",
+                  cursor: "pointer",
+                  marginRight: "1.6rem",
+                  textDecoration: "none",
+                }}
+              >
+                Login
+              </Link>
+            </nav>
           )}
-          {isLoggedIn && <button onClick={logoutHandler}>Logout</button>}
+          {isLoggedIn && (
+            <button
+              onClick={logoutHandler}
+              style={{
+                backgroundColor: "red",
+                border: "none",
+                fontSize: "1.4rem",
+                padding: "0.6rem",
+                color: "#fff",
+                borderRadius: "3px",
+              }}
+            >
+              Logout
+            </button>
+          )}
         </Toolbar>
       </AppBar>
     </React.Fragment>

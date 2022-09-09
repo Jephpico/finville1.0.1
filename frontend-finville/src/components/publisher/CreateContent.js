@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Axios from "axios";
 import style from "./CreateContent.module.css";
 import Header from "./Header";
@@ -43,8 +43,9 @@ const CreateContent = () => {
       postedData,
       header
     ).then((res) => {
-      setPostData(initialPostData);
+      console.log(res)
       alert("Post submitted successfully");
+      setPostData(initialPostData);
       return navigate("/publisher/dashboard");
     });
   };
@@ -75,7 +76,7 @@ const CreateContent = () => {
           </div>
           <div className={style["form-group"]}>
             <label htmlFor="content">Content</label>
-            <CKEditor
+            {/* <CKEditor
               className={style["form-control"]}
               name="body"
               editor={ClassicEditor}
@@ -84,6 +85,13 @@ const CreateContent = () => {
                 const data = editor.getData();
                 setPostData({ ...postData, body: data });
               }}
+            /> */}
+            <input
+              type="text"
+              className={style["form-control"]}
+              name="body"
+              id="body"
+              onChange={handlePostChange}
             />
           </div>
           <button type="submit">Submit</button>

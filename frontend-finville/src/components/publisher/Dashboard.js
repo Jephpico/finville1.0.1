@@ -1,20 +1,11 @@
-import { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import AuthContext from "../../store/auth-context";
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { FiEdit } from "react-icons/fi";
+import { MdDeleteOutline } from "react-icons/md";
 import Axios from "axios";
-
-import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom"
 import Header from "./Header";
-import { Delete, Edit } from "@mui/icons-material";
+import style from "./Dashboard.module.css";
 
 const Dashboard = () => {
   const authCtx = useContext(AuthContext);
@@ -27,75 +18,41 @@ const Dashboard = () => {
         "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    })
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
+    }).then((res) => setData(res.data));
+   
+
+    // .catch((err) => console.log(err));
   }, [token]);
   return (
     <>
       <Header />
-      <Container
-        maxWidth="md"
-        component="main"
-        sx={{ mt: "70px", position: "relative" }}
-      >
-        <Grid container spacing={5} alignItems="flex-end">
-          {data.map((post) => {
+      <div className={style.container}>
+        <ul className={style.flex}>
+          {data.map((data) => {
             return (
-              <Grid item key={post.id} xs={12} md={4}>
-                <Card>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="headline"
-                        component="h2"
-                      >
-                        {post.title}
-                      </Typography>
-                      <Typography component="Lizard">{post.slug}</Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions
-                    sx={{
-                      display: "flex",
+              <li key={data.id} className={style["flex-item"]}>
+                <div className={style["blog-container"]}>
+                  <div className={style["image-box"]}>
+                    <img src={data.image1} alt="" />
+                  </div>
+                  <div className={style["text-box"]}>
+                    <h3>{data.title}</h3>
+                    <p>
+                      {data.body.substr(0, 50)}... <Link to={`/publisher/dashboard/${data.title}`}>Read More</Link>
+                    </p>
+                  </div>
+                  <div className={style.ctn}>
+                    <FiEdit size={16} color="green" />
+                    <MdDeleteOutline size={24} color="red" />
+                  </div>
+                </div>
 
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Button color="primary">Read Details</Button>
-                    <Button
-                      color="primary"
-                      size="small"
-                      sx={{ fontSize: "13px" }}
-                    >
-                      <Edit />
-                    </Button>
-                    <Button color="error" sx={{ fontSize: "13px" }}>
-                      <Delete />
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
+                {/* <div dangerouslySetInnerHTML={{ __html: data.body }}></div> */}
+              </li>
             );
           })}
-        </Grid>
-        {/* <Tooltip
-          title="Add new post"
-          sx={{
-            position: "absolute",
-            bottom: -90,
-            left: { xs: 10, md: -80 },
-          }}
-        >
-          <Fab color="primary" aria-label="add">
-            <Link to="/create">
-              <Add />
-            </Link>
-          </Fab>
-        </Tooltip> */}
-      </Container>
+        </ul>
+      </div>
     </>
   );
 };

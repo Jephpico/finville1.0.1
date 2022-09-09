@@ -16,7 +16,7 @@ const PostDetail = () => {
         "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    });
+    }).then((res) => setData(res.data));
 
     // .catch((err) => console.log(err));
   }, [token, postId]);
@@ -25,8 +25,8 @@ const PostDetail = () => {
     <>
       <Header />
       <div>PostDetails</div>
-      {/* <p>{data.title}</p>
-      <p>{data.body}</p> */}
+      <p>{data.title}</p>
+      <p>{data.body}</p>
     </>
   );
 };

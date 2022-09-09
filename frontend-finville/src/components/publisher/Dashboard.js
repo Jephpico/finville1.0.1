@@ -3,7 +3,7 @@ import AuthContext from "../../store/auth-context";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import Axios from "axios";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import Header from "./Header";
 import style from "./Dashboard.module.css";
 
@@ -19,7 +19,6 @@ const Dashboard = () => {
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => setData(res.data));
-   
 
     // .catch((err) => console.log(err));
   }, [token]);
@@ -38,7 +37,10 @@ const Dashboard = () => {
                   <div className={style["text-box"]}>
                     <h3>{data.title}</h3>
                     <p>
-                      {data.body.substr(0, 50)}... <Link to={`/publisher/dashboard/${data.title}`}>Read More</Link>
+                      {data.body.substr(0, 50)}...{" "}
+                      <Link to={`/publisher/dashboard/${data.id}`}>
+                        Read More
+                      </Link>
                     </p>
                   </div>
                   <div className={style.ctn}>

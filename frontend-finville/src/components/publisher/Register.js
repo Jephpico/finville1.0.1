@@ -38,7 +38,7 @@ const Register = () => {
     event.preventDefault();
 
     axiosInstance
-      .post("/accounts/signup/", {
+      .post("/accounts/publisher/signup/", {
         first_name: formData.firstName,
         last_name: formData.lastName,
         email: formData.email,

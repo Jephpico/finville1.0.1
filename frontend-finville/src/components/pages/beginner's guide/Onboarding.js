@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom"
 import Axios from "axios";
 import icon2 from "../../../assets/Rectangle 50.png";
 import style from "./Onboarding.module.css";
@@ -13,31 +14,42 @@ const Onboarding = () => {
   return (
     <>
       <main className={style.main}>
-        <div className={style["title-container"]}>
-          <div className={style.title}>
-            <h2>Onboarding</h2>
-            <p>
-              Detailed Walkthrough for various financial products & services
-            </p>
+        <div className={style.container}>
+          <div className={style["title-container"]}>
+            <div className={style.title}>
+              <h2>Onboarding</h2>
+              <p>
+                Detailed Walkthrough for various financial products & services
+              </p>
+            </div>
+            <div className={style["title-icon"]}>
+              <img src={icon2} alt="" />
+            </div>
           </div>
-          <div className={style["title-icon"]}>
-            <img src={icon2} alt="" />
+          <div className={style["search-container"]}></div>
+          <div className={style["content-container"]}>
+            <ul className={style.flex}>
+              {data.map((data) => {
+                return (
+                  <li key={data.id} className={style["flex-item"]}>
+                    <div className={style["blog-container"]}>
+                      <div className={style["image-box"]}>
+                        <img src={data.image1} alt="" />
+                      </div>
+                      <div className={style["text-box"]}>
+                        <h3>{data.title}</h3>
+                        <p>
+                          {data.body.substr(0, 50)}... <Link>Read More</Link>
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* <div dangerouslySetInnerHTML={{ __html: data.body }}></div> */}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </div>
-        <div className={style["search-container"]}></div>
-        <div className={style["content-container"]}>
-          <ul className={style.flex}>
-            {data.map((data) => {
-              return (
-                <li key={data.id} className={style["flex-item"]}>
-                  <img src={data.thumbnail} alt="" />
-                  <h3>{data.title}</h3>
-                  <p>{data.slug}</p>
-                  <div dangerouslySetInnerHTML={{ __html: data.body }}></div>
-                </li>
-              );
-            })}
-          </ul>
         </div>
       </main>
     </>

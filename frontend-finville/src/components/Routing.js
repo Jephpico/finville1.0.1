@@ -10,6 +10,7 @@ import Register from "./publisher/Register";
 import Onboarding from "./pages/beginner's guide/Onboarding";
 import CreateContent from "./publisher/CreateContent";
 import Dashboard from "./publisher/Dashboard";
+import PostDetail from "./publisher/PostDetail";
 const Routing = () => {
   const authCtx = useContext(AuthContext);
   return (
@@ -37,6 +38,9 @@ const Routing = () => {
 
         {authCtx.isLoggedIn && (
           <Route path="/publisher/dashboard" element={<Dashboard />} />
+        )}
+          {authCtx.isLoggedIn && (
+          <Route path="/publisher/dashboard/:postId" element={<PostDetail />} />
         )}
 
         {!authCtx.isLoggedIn && (

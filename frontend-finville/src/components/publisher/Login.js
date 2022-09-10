@@ -56,10 +56,7 @@ const Login = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Container
-        maxWidth="xs"
-        sx={{ boxShadow: "0 0 5px rgba(0,0,0,0.15)", borderRadius: "4px" }}
-      >
+      <Container maxWidth="xs" sx={{ borderRadius: "4px" }}>
         <CssBaseline />
         <Box
           sx={{

@@ -5,6 +5,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import swal from "sweetalert";
 import style from "./Dashboard.module.css";
 
 const Dashboard = () => {
@@ -13,15 +14,33 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://127.0.0.1:8000/api/beginners-guide/publisher_board/", {
+    Axios.get(`http://127.0.0.1:8000/api/beginners-guide/publisher_board/`, {
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    }).then((res) => setData(res.data));
+    }).then((res) => {
+      const data = res.data;
+      setData(data);
+    });
 
     // .catch((err) => console.log(err));
   }, [token]);
+
+  const handleDelete = (id) => {
+    Axios.delete(
+      `http://127.0.0.1:8000/api/beginners-guide/publisher_board/${id}/`,
+      {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((res) => {
+      setData(data.filter((item) => item.id !== id));
+    });
+  };
+
   return (
     <>
       <Header />
@@ -37,7 +56,7 @@ const Dashboard = () => {
                   <div className={style["text-box"]}>
                     <h3>{data.title}</h3>
                     <p>
-                      {data.body.substr(0, 50)}...{" "}
+                      {data.body.substr(0, 50)}...
                       <Link to={`/publisher/dashboard/${data.id}`}>
                         Read More
                       </Link>
@@ -45,16 +64,20 @@ const Dashboard = () => {
                   </div>
                   <div className={style.ctn}>
                     <FiEdit size={16} color="green" />
-                    <MdDeleteOutline size={24} color="red" />
+                    <MdDeleteOutline
+                      onClick={() => handleDelete(data.id)}
+                      size={24}
+                      color="red"
+                    />
                   </div>
                 </div>
-
                 {/* <div dangerouslySetInnerHTML={{ __html: data.body }}></div> */}
               </li>
             );
           })}
         </ul>
       </div>
+      {data.length < 1 && <p>No posts yet. Please check back</p>}
     </>
   );
 };

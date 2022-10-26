@@ -1,7 +1,6 @@
 .container {
   max-width: 120rem;
   margin: auto;
-
 }
 .flex {
   /* max-width: 120rem; */
@@ -50,6 +49,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  height: 70vh;
 }
 @media (max-width: 670px) {
   .title-container {

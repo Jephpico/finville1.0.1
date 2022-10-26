@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import swal from "sweetalert";
 
@@ -8,7 +8,9 @@ import swal from "sweetalert";
 import Axios from "axios";
 import style from "./CreateContent.module.css";
 import Header from "./Header";
-const CreateContent = () => {
+const EditPost = () => {
+  // const [data, setData] = useState([]);
+  const { postId } = useParams();
   const authCtx = useContext(AuthContext);
   const token = authCtx.token;
 
@@ -48,7 +50,7 @@ const CreateContent = () => {
       console.log(res);
       swal({
         title: "Good job!",
-        text: "Post created successfully",
+        text: "You clicked the button!",
         icon: "success",
         button: "Ok",
       });
@@ -101,11 +103,11 @@ const CreateContent = () => {
               onChange={handlePostChange}
             />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit">Update</button>
         </form>
       </div>
     </>
   );
 };
 
-export default CreateContent;
+export default EditPost;

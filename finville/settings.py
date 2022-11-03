@@ -15,6 +15,7 @@ from datetime import timedelta
 import os
 # Configure Django App for Heroku.
 import django_on_heroku
+import dj_database_url
 
 
 
@@ -264,3 +265,5 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL  = None
 
 django_on_heroku.settings(locals())
+prod_db = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(prod_db)

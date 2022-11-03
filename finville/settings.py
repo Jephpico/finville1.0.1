@@ -13,7 +13,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
-import django_heroku
+# Configure Django App for Heroku.
+import django_on_heroku
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,7 +87,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
 
-AUTH_USER_MODEL = 'accounts.ProductUser'
+AUTH_USER_MODEL = 'accounts.ProductUser'git
 #
 
 TEMPLATES = [
@@ -260,7 +263,4 @@ AWS_S3_FILE_OVERWRITE = False
 
 AWS_DEFAULT_ACL  = None
 
-
-
-
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
